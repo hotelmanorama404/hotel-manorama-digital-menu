@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Manorama - Digital Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+            padding-bottom: 60px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
+            animation: pulse 15s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 0px 10px 0px;
+            text-align: center;
+            border-bottom: 2px solid #d4af37;
+            z-index: 100;
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3);
+        }
+
+        .restaurant-name {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 3px;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            margin-bottom: 0px;
+            animation: shimmer 3s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 0px;
+            display: block;
+            animation: fadeInLogo 1s ease-in;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: opacity 0.3s ease-in-out, margin 0.3s ease-in-out, height 0.3s ease-in-out;
+        }
+
+        @keyframes fadeInLogo {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: #ffffff;
+            font-style: italic;
+            margin: 8px 0;
+            letter-spacing: 1px;
+        }
+
+        .tagline {
+            font-size: 14px;
+            color: #d4af37;
+            font-style: italic;
+            margin: 10px 0;
+            padding: 8px;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .contact-info {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .phone {
+            color: #000;
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin: 8px 0;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .phone:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.6);
+        }
+
+        .location {
+            font-size: 12px;
+            color: #ccc;
+            margin-top: 5px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Quick nav pills */
+        .quick-nav {
+            position: sticky;
+            top: 125px;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 12px 15px;
+            margin: 15px -20px;
+            overflow-x: auto;
+            white-space: nowrap;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            z-index: 50;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .quick-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-pill {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 0 5px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            color: #d4af37;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .nav-pill:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .section {
+            margin: 40px 0;
+            animation: fadeIn 0.8s ease-in;
+            scroll-margin-top: 180px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 26px;
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: #f4d03f;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                width: 0;
+            }
+            to {
+                width: 60px;
+            }
+        }
+
+        .price-banner {
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
+            color: #000;
+            padding: 15px 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 17px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4); }
+            50% { box-shadow: 0 6px 30px rgba(212, 175, 55, 0.6); }
+        }
+
+        .menu-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            padding: 18px;
+            margin: 14px 0;
+            border-radius: 12px;
+            border-left: 4px solid #d4af37;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .menu-item:hover::before {
+            left: 100%;
+        }
+
+        .menu-item:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+            transform: translateX(8px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+            border-left-width: 6px;
+        }
+
+        .item-name {
+            font-size: 17px;
+            color: #ffffff;
+            margin-bottom: 6px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .item-price {
+            color: #d4af37;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .special-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            margin-left: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        .veg-badge, .non-veg-badge {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid;
+            border-radius: 2px;
+            margin-right: 8px;
+            position: relative;
+            vertical-align: middle;
+        }
+
+        .veg-badge {
+            border-color: #22c55e;
+        }
+
+        .veg-badge::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #22c55e;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .non-veg-badge {
+            border-color: #ef4444;
+        }
+
+        .non-veg-badge::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-bottom: 7px solid #ef4444;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #d4af37 50%, transparent 100%);
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .divider::after {
+            content: '✦';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #000;
+            padding: 0 15px;
+            color: #d4af37;
+            font-size: 18px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.9) 20%, #000 100%);
+            margin-top: 60px;
+            border-top: 3px solid #d4af37;
+            position: relative;
+        }
+
+        .footer-title {
+            font-size: 22px;
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .footer-phone {
+            color: #000;
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            text-decoration: none;
+            font-size: 18px;
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 25px;
+            margin: 15px 0 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .footer-phone:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.6);
+        }
+
+        .footer .location {
+            font-size: 14px;
+            color: #d4af37;
+            margin: 10px 0;
+        }
+
+        .copyright {
+            font-size: 12px;
+            color: #888;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .note {
+            font-size: 13px;
+            color: #aaa;
+            font-style: italic;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            color: #000;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Recommendations */
+        .chef-special {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+            border-left-color: #f4d03f;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="logo.png" alt="Hotel Manorama Logo" class="logo" id="logo">
+        <div class="restaurant-name">HOTEL MANORAMA</div>
+        <div class="subtitle">A Family Restaurant</div>
+        <div class="tagline">Taste. Experience. Repeat</div>
+    </div>
+
+    <div class="quick-nav">
+        <a href="#thali" class="nav-pill">🍽️ Thali</a>
+        <a href="#veg" class="nav-pill">🥗 Veg</a>
+        <a href="#biryani" class="nav-pill">🍚 Biryani</a>
+        <a href="#chicken" class="nav-pill">🍗 Chicken</a>
+        <a href="#mutton" class="nav-pill">🥩 Mutton</a>
+        <a href="#fish" class="nav-pill">🐟 Fish</a>
+        <a href="#paneer" class="nav-pill">🧀 Paneer</a>
+        <a href="#drinks" class="nav-pill">🥤 Drinks</a>
+    </div>
+
+    <div class="container">
+        <!-- THALI SECTION -->
+        <div class="section" id="thali">
+            <div class="section-title">🍽️ THALI</div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Veg Thali</div>
+                <div class="item-price">₹100</div>
+            </div>
+            <div class="menu-item chef-special">
+                <div class="item-name"><span class="veg-badge"></span>Special Veg Thali<span class="special-badge">CHEF'S SPECIAL</span></div>
+                <div class="item-price">₹150</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Special Veg Thali (With Egg)</div>
+                <div class="item-price">₹170</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name">Egg Thali</div>
+                <div class="item-price">₹140</div>
+            </div>
+            <div class="menu-item chef-special">
+                <div class="item-name"><span class="non-veg-badge"></span>Chicken Thali<span class="special-badge">POPULAR</span></div>
+                <div class="item-price">₹170</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Fish Thali</div>
+                <div class="item-price">₹140</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Mutton Thali</div>
+                <div class="item-price">₹280</div>
+            </div>
+        </div>
+
+        <div class="price-banner">H = Half | F = Full</div>
+
+        <!-- VEGETARIAN -->
+        <div class="section" id="veg">
+            <div class="section-title">🥗 VEGETARIAN</div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Mix Veg</div>
+                <div class="item-price">H ₹90 | F ₹180</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Veg Kurma</div>
+                <div class="item-price">H ₹100 | F ₹200</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Tawa Veg</div>
+                <div class="item-price">H ₹100 | F ₹200</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Veg Kadai</div>
+                <div class="item-price">H ₹100 | F ₹200</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Veg Hyderabadi</div>
+                <div class="item-price">H ₹120 | F ₹240</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- DAL -->
+        <div class="section">
+            <div class="section-title">🍲 DAL</div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Plain Dal</div>
+                <div class="item-price">H ₹30 | F ₹60</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Dal Tadka</div>
+                <div class="item-price">H ₹60 | F ₹120</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Dal Fry</div>
+                <div class="item-price">H ₹60 | F ₹120</div>
+            </div>
+            <div class="menu-item chef-special">
+                <div class="item-name"><span class="veg-badge"></span>Dal Makhani<span class="special-badge">POPULAR</span></div>
+                <div class="item-price">H ₹80 | F ₹150</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Special Dal</div>
+                <div class="item-price">H ₹100 | F ₹180</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Dalma</div>
+                <div class="item-price">H ₹50 | F ₹100</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- BIRYANI -->
+        <div class="section" id="biryani">
+            <div class="section-title">🍚 BIRYANI</div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Veg Biryani</div>
+                <div class="item-price">₹140</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name">Egg Biryani</div>
+                <div class="item-price">₹130</div>
+            </div>
+            <div class="menu-item chef-special">
+                <div class="item-name"><span class="non-veg-badge"></span>Chicken Biryani (Dum)<span class="special-badge">CHEF'S SPECIAL</span></div>
+                <div class="item-price">₹180</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Chicken Biryani (Fry)</div>
+                <div class="item-price">₹150</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Mutton Biryani</div>
+                <div class="item-price">₹270</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- RICE -->
+        <div class="section">
+            <div class="section-title">🍽️ RICE</div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Plain Rice (Arua/Usna)</div>
+                <div class="item-price">H ₹40/30 | F ₹80/60</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Jeera Rice</div>
+                <div class="item-price">H ₹40 | F ₹80</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Jeera Rice (Basmati)</div>
+                <div class="item-price">H ₹80 | F ₹140</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Veg Fried Rice (Plain)</div>
+                <div class="item-price">H ₹80 | F ₹150</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Veg Fried Rice (Basmati)</div>
+                <div class="item-price">H ₹90 | F ₹160</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Basmati Rice</div>
+                <div class="item-price">H ₹50 | F ₹100</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- PARATHA -->
+        <div class="section">
+            <div class="section-title">🫓 PARATHA</div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Plain Paratha</div>
+                <div class="item-price">₹20</div>
+            </div>
+            <div class="menu-item chef-special">
+                <div class="item-name"><span class="veg-badge"></span>Aloo Paratha<span class="special-badge">POPULAR</span></div>
+                <div class="item-price">₹50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Methi Paratha</div>
+                <div class="item-price">₹30</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Paneer Paratha</div>
+                <div class="item-price">₹80</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- CHICKEN -->
+        <div class="section" id="chicken">
+            <div class="section-title">🍗 CHICKEN</div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Chicken Curry</div>
+                <div class="item-price">H ₹90 | F ₹180</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Chicken Masala / Kasha</div>
+                <div class="item-price">H ₹120 | F ₹200</div>
+            </div>
+            <div class="menu-item chef-special">
+                <div class="item-name"><span class="non-veg-badge"></span>Chicken Butter Masala<span class="special-badge">CHEF'S SPECIAL</span></div>
+                <div class="item-price">H ₹120 | F ₹240</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Chicken Mughlai</div>
+                <div class="item-price">H ₹120 | F ₹240</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Chicken Hyderabadi</div>
+                <div class="item-price">H ₹120 | F ₹240</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Chicken Handi Poda</div>
+                <div class="item-price">H ₹150 | F ₹300</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- MUTTON -->
+        <div class="section" id="mutton">
+            <div class="section-title">🥩 MUTTON</div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Mutton Curry</div>
+                <div class="item-price">H ₹190 | F ₹380</div>
+            </div>
+            <div class="menu-item chef-special">
+                <div class="item-name"><span class="non-veg-badge"></span>Mutton Masala / Kasha<span class="special-badge">POPULAR</span></div>
+                <div class="item-price">H ₹200 | F ₹400</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Mutton Liver Fry</div>
+                <div class="item-price">H ₹250 | F ₹500</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Mutton Puta Bhaja</div>
+                <div class="item-price">H ₹150 | F ₹300</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- FISH -->
+        <div class="section" id="fish">
+            <div class="section-title">🐟 FISH</div>
+            <div class="note">H – 1 pc | F – 2 pcs</div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Fish Curry</div>
+                <div class="item-price">H ₹40 | F ₹80</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Fish Masala</div>
+                <div class="item-price">H ₹50 | F ₹100</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Fish Fry</div>
+                <div class="item-price">H ₹40 | F ₹80</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Fish Butter Masala</div>
+                <div class="item-price">H ₹70 | F ₹140</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- EGG -->
+        <div class="section">
+            <div class="section-title">🍳 EGG</div>
+            <div class="menu-item">
+                <div class="item-name">Egg Curry</div>
+                <div class="item-price">H ₹70 | F ₹140</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name">Egg Masala</div>
+                <div class="item-price">H ₹80 | F ₹160</div>
+            </div>
+            <div class="menu-item chef-special">
+                <div class="item-name">Egg Bhurji<span class="special-badge">POPULAR</span></div>
+                <div class="item-price">H ₹60 | F ₹120</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name">Egg Bhurji Curry</div>
+                <div class="item-price">H ₹70 | F ₹140</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name">Egg Tadka</div>
+                <div class="item-price">H ₹80 | F ₹160</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name">Omelette</div>
+                <div class="item-price">₹50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name">Egg Pouch</div>
+                <div class="item-price">₹30</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name">Boiled Egg</div>
+                <div class="item-price">₹20</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- PANEER -->
+        <div class="section" id="paneer">
+            <div class="section-title">🧀 PANEER</div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Paneer Masala</div>
+                <div class="item-price">H ₹90 | F ₹180</div>
+            </div>
+            <div class="menu-item chef-special">
+                <div class="item-name"><span class="veg-badge"></span>Paneer Butter Masala<span class="special-badge">CHEF'S SPECIAL</span></div>
+                <div class="item-price">H ₹120 | F ₹240</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Matar Paneer</div>
+                <div class="item-price">H ₹100 | F ₹200</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Paneer Bharta</div>
+                <div class="item-price">H ₹91 | F ₹130</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Paneer Kurma</div>
+                <div class="item-price">H ₹120 | F ₹240</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Paneer Hyderabadi</div>
+                <div class="item-price">H ₹120 | F ₹240</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Paneer Kadai</div>
+                <div class="item-price">H ₹120 | F ₹240</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- CHILLI -->
+        <div class="section">
+            <div class="section-title">🌶️ CHILLI</div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Paneer Chilli</div>
+                <div class="item-price">H ₹150 | F ₹300</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Mushroom Chilli</div>
+                <div class="item-price">H ₹150 | F ₹300</div>
+            </div>
+            <div class="menu-item chef-special">
+                <div class="item-name"><span class="non-veg-badge"></span>Chicken Chilli<span class="special-badge">POPULAR</span></div>
+                <div class="item-price">H ₹150 | F ₹300</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Chana Chilli</div>
+                <div class="item-price">H ₹140 | F ₹280</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Corn Chilli</div>
+                <div class="item-price">H ₹140 | F ₹280</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Gobi Chilli</div>
+                <div class="item-price">H ₹140 | F ₹280</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- PAKODA -->
+        <div class="section">
+            <div class="section-title">🧆 PAKODA</div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Chicken Pakoda</div>
+                <div class="item-price">H ₹150 | F ₹300</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Veg Pakoda</div>
+                <div class="item-price">H ₹100 | F ₹200</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Paneer Pakoda</div>
+                <div class="item-price">H ₹150 | F ₹300</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Mushroom Pakoda</div>
+                <div class="item-price">H ₹150 | F ₹300</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Onion Pakoda</div>
+                <div class="item-price">H ₹100 | F ₹200</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- DRY ITEMS -->
+        <div class="section">
+            <div class="section-title">🥩 DRY ITEMS</div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Chicken Dry Fry</div>
+                <div class="item-price">H ₹180 | F ₹350</div>
+            </div>
+            <div class="menu-item chef-special">
+                <div class="item-name"><span class="non-veg-badge"></span>Chicken Lollipop<span class="special-badge">POPULAR</span></div>
+                <div class="item-price">H ₹180 | F ₹350</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Chana Dry</div>
+                <div class="item-price">H ₹100 | F ₹200</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Corn Dry</div>
+                <div class="item-price">H ₹100 | F ₹200</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- PRAWN -->
+        <div class="section">
+            <div class="section-title">🍤 PRAWN</div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Prawn Curry</div>
+                <div class="item-price">H ₹150 | F ₹300</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Prawn Masala</div>
+                <div class="item-price">H ₹170 | F ₹340</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Prawn Fry</div>
+                <div class="item-price">H ₹120 | F ₹240</div>
+            </div>
+            <div class="menu-item chef-special">
+                <div class="item-name"><span class="non-veg-badge"></span>Prawn Butter Masala<span class="special-badge">CHEF'S SPECIAL</span></div>
+                <div class="item-price">H ₹200 | F ₹400</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="non-veg-badge"></span>Chilli Prawn</div>
+                <div class="item-price">H ₹150 | F ₹300</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- PAPAD -->
+        <div class="section">
+            <div class="section-title">🫓 PAPAD</div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Dry Papad</div>
+                <div class="item-price">₹20</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Dry Masala Papad</div>
+                <div class="item-price">₹30</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Fried Papad</div>
+                <div class="item-price">₹30</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Fried Masala Papad</div>
+                <div class="item-price">₹40</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name"><span class="veg-badge"></span>Butter Papad</div>
+                <div class="item-price">₹50</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- COLD DRINKS -->
+        <div class="section" id="drinks">
+            <div class="section-title">🥤 COLD DRINKS</div>
+            <div class="menu-item">
+                <div class="item-name">Water Bottle (1 Ltr)</div>
+                <div class="item-price">₹20</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name">Soda</div>
+                <div class="item-price">₹30</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name">Masala Cold Drinks</div>
+                <div class="item-price">₹30</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name">Masala Soda</div>
+                <div class="item-price">₹30</div>
+            </div>
+        </div>
+    </div>
+
+    <button class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
+    <div class="footer">
+        <div class="footer-title">Thank You for Visiting HOTEL MANORAMA</div>
+        <div class="contact-info">
+            <a href="tel:9938245881" class="footer-phone">📞 9938245881</a>
+            <div class="location">📍 Chinimahul, Jamankira</div>
+        </div>
+        <div class="copyright">© 2025 Hotel Manorama. All rights reserved.</div>
+    </div>
+
+    <script>
+        // Show scroll to top button
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.querySelector('.scroll-top');
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('.nav-pill').forEach(pill => {
+            pill.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Hide logo on scroll
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            if (scrollTimeout) return;
+            scrollTimeout = setTimeout(() => {
+                const header = document.querySelector('.header');
+                const logo = document.querySelector('.logo');
+                if (window.scrollY > 50) {
+                    logo.style.opacity = '0';
+                    logo.style.margin = '0';
+                    logo.style.height = '0px';
+                    header.style.padding = '0px 10px';
+                } else {
+                    logo.style.opacity = '1';
+                    logo.style.margin = '0 auto 0px';
+                    logo.style.height = '120px';
+                    header.style.padding = '0px 10px 0px';
+                }
+                scrollTimeout = null;
+            }, 10); // Run every 10ms at most
+        });
+    </script>
+</body>
+</html>
